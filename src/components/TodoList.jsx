@@ -1,13 +1,15 @@
-import React from "react"
+import React , {useContext}from "react"
+import AuthContext from "../store/auth-context"
 import './TodoList.css'
 
-const TodoList = ({data, setData}) => {
+const TodoList = () => {
+    const cntxData = useContext(AuthContext)
     const deleteHandler = (event) => {
-        setData(data.filter((el) => el.id !== event.target.id))
+        cntxData.setData(cntxData.data.filter((el) => el.id !== event.target.id))
     }
     const checkHandler = (event) => {
     
-        setData(data.map(el => {
+        cntxData.setData(cntxData.data.map(el => {
             if(el.id === event.target.id){
                 el.completed = !el.completed
             }
@@ -17,7 +19,7 @@ const TodoList = ({data, setData}) => {
     return (
         <>
         <ul>
-            {data.map((el) => {
+            {cntxData.data.map((el) => {
                 return (
                 <li key={el.id}>
                     <span className={el.completed ? 'done' : ''}>{el.value}</span>

@@ -1,7 +1,8 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useContext, useReducer, useState } from 'react'
 import './TodoForm.css'
 import ErrorModal from './UI/ErrorModal'
 import BackDrop from './UI/BackDrop'
+import AuthContext from '../store/auth-context'
 const Todoreducer = (state, action) => {
 	if (action.type === 'USER_INPUT') {
 		return {
@@ -14,7 +15,9 @@ const Todoreducer = (state, action) => {
 		isValid: false,
 	}
 }
-const TodoForm = ({ onGetDataHandler }) => {
+const TodoForm = () => {
+	const cntxData = useContext(AuthContext)
+
 	const [error, setError] = useState(false)
 
 	const [todostate, dispatchTodo] = useReducer(Todoreducer, {
@@ -41,7 +44,7 @@ const TodoForm = ({ onGetDataHandler }) => {
 				title: 'Напишите что нибудь',
 			})
 		}
-		onGetDataHandler(newData)
+		cntxData.newDataHandler(newData)
 	}
 	const ErrorHandler = () => {
 		setError(null)

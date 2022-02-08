@@ -2,7 +2,6 @@ import React from 'react'
 import classes from './ErrorModal.module.css'
 
 const ErrorModal = (props) => {
-    console.log(props);
 	return (
 		<div className={classes.modal}>
 			<header className={classes.header}>
